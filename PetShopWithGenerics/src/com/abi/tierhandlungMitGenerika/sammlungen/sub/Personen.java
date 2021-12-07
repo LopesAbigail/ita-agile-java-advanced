@@ -1,12 +1,13 @@
-package com.abi.tierhandlungMitGenerika.sammlungen;
+package com.abi.tierhandlungMitGenerika.sammlungen.sub;
 
-public class Personen {
-    private final String name;
+import com.abi.tierhandlungMitGenerika.sammlungen.Individuell;
+
+public class Personen extends Individuell {
+
     private final String jahreAlt;
 
     public Personen(String name, String jahreAlt){
-        super();
-        this.name = name;
+        super(name);
         this.jahreAlt = jahreAlt;
     }
 

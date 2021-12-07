@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Tierhandlung<E> {
 
-    private List<E> list = new ArrayList<>();
+    private final List<E> list = new ArrayList<>();
 
     public void add(E tier){
         list.add(tier);

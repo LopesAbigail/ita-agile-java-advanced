@@ -1,12 +1,12 @@
-package com.abi.tierhandlungMitGenerika.sammlungen;
+package com.abi.tierhandlungMitGenerika.sammlungen.sub;
 
-public class Tier {
-    private final String name;
+import com.abi.tierhandlungMitGenerika.sammlungen.Individuell;
+
+public class Tier extends Individuell {
     private final String farbe;
 
     public Tier(String name, String farbe){
-        super();
-        this.name = name;
+        super(name);
         this.farbe = farbe;
     }
 
