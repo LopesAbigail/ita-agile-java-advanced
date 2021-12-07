@@ -1,6 +1,7 @@
 package com.abi.tierhandlungMitGenerika;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -10,6 +11,12 @@ public class Tierhandlung<E> {
 
     public void add(E tier){
         list.add(tier);
+    }
+
+    public void addAlles(Collection<E> elements){
+        for(E element: elements){
+            add(element);
+        }
     }
 
     public E handhaben(){

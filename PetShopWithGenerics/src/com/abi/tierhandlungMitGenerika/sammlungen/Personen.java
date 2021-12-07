@@ -1,4 +1,4 @@
-package com.abi.tierhandlungMitGenerika;
+package com.abi.tierhandlungMitGenerika.sammlungen;
 
 public class Tier {
     private final String name;

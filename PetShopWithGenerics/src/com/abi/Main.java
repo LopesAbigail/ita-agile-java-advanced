@@ -1,6 +1,6 @@
 package com.abi;
 
-import com.abi.tierhandlungMitGenerika.Tier;
+import com.abi.tierhandlungMitGenerika.sammlungen.Tier;
 import com.abi.tierhandlungMitGenerika.Tierhandlung;
 
 public class Main {
