@@ -13,8 +13,9 @@ public class Tierhandlung<E> {
         list.add(tier);
     }
 
-    public void addAlles(Collection<E> elements){
+    public void addAlles(Collection<? extends E> elements){
         for(E element: elements){
+            System.out.println("Adding " + element);
             add(element);
         }
     }
