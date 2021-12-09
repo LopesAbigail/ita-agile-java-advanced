@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Abi
  */
 @WebServlet(name = "converter", urlPatterns = {"/converter"})
-public class converter extends HttpServlet {
+public class Converter extends HttpServlet {
     
     private int convert(String type, int value)
     {
