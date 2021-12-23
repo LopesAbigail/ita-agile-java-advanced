@@ -10,6 +10,11 @@ public class Produkt {
 		this.name = name;
 		this.wert = wert;
 	}
+	
+	public void rabatt() {
+		int prozentsatz = 10;
+		wert = wert*(1+(prozentsatz/100));
+	}
 
 	public String getName() {
 		return name;
@@ -25,6 +30,11 @@ public class Produkt {
 
 	public void setWert(int wert) {
 		this.wert = wert;
+	}
+
+	@Override
+	public String toString() {
+		return "Produkt [name=" + name + ", wert=" + wert + "]";
 	}
 
 }

@@ -15,7 +15,19 @@ public class Hauptsachlich {
 		
 		// Method reference
 		list.forEach(System.out::println);
-
+		
+		// Lambda reference
+		list.forEach(item -> System.out.println(item.getName()));
+		
+		// Rabatt
+		list.forEach(p -> p.setWert(p.getWert() * 90/100));
+		list.forEach(System.out::println);
+		
+		// Rabatt - another way
+		list.forEach(Produkt::rabatt);
+		
+		
+		
 	}
 
 }
