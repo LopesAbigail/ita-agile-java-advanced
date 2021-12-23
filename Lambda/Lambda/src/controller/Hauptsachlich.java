@@ -1,7 +1,10 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Einkaufswagen;
+import model.Produkt;
 
 public class Hauptsachlich {
 
@@ -13,6 +16,7 @@ public class Hauptsachlich {
 		list.add(new Produkt("Lasagne", 20));
 		list.add(new Produkt("Hühnerpastete", 30));
 		
+		/*
 		// Method reference
 		list.forEach(System.out::println);
 		
@@ -25,6 +29,11 @@ public class Hauptsachlich {
 		
 		// Rabatt - another way
 		list.forEach(Produkt::rabatt);
+		*/
+		
+		Einkaufswagen einkaufswagen = new Einkaufswagen(list);
+		einkaufswagen.rabatt(20, p -> p.getWert() < 100);
+		einkaufswagen.getProduktList().forEach(System.out::println);
 		
 		
 		
