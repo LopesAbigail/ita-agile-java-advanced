@@ -17,7 +17,9 @@ public class StringUtils {
 		return Normalizer
 				.normalize(src, Normalizer.Form.NFD)
 				.replaceAll("[^\\p{ASCII}]", "")
-                                .toLowerCase().trim();
+                                .toLowerCase()
+                                .replaceAll("ç", "c")
+                                .trim();
     }
     
     public String getTranslation(String line) 
