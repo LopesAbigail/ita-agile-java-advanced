@@ -18,7 +18,7 @@
     </head>
     <body>
         <h1>Traduza aqui a sua palavra!</h1>
-        <div> 
+        <div>
             <form action="translate">
                 <div>
                     <label for="word"> Palavra: </label>
