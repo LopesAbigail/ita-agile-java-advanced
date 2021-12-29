@@ -15,11 +15,10 @@ public class StringUtils {
     public String prepareWord(String src) 
     {
 		return Normalizer
-				.normalize(src, Normalizer.Form.NFD)
-				.replaceAll("[^\\p{ASCII}]", "")
-                                .toLowerCase()
-                                .replaceAll("ç", "c")
-                                .trim();
+			.normalize(src, Normalizer.Form.NFD)
+                        .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                        .toLowerCase()
+                        .trim();
     }
     
     public String getTranslation(String line) 
