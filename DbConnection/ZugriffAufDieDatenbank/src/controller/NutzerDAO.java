@@ -45,4 +45,25 @@ public class NutzerDAO {
 		
 		return allesBenutzer;
 	}
+	
+	public static void insert (Nutzer n) {
+		
+		try (Connection c = DriverManager.getConnection(
+				"jdbc:postgresql://localhost/usuarios", "postgres", "postgres")){
+			
+			String sql = "INSERT INTO public.usuario(login, nome, email) VALUES (?, ?, ?)";
+			
+			PreparedStatement stm = c.prepareStatement(sql);
+			stm.setString(1, n.getAnmeldung());
+			stm.setString(2, n.getName());
+			stm.setString(3, n.getEmail());
+
+			stm.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Beim Verbindungsaufbau ist ein Fehler aufgetreten!", e);
+		}
+	}
+	
 }
