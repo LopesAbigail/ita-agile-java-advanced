@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import controller.NutzerDAO;
+import model.Nutzer;
+
 class TestNutzerDAO {
 	
 	JdbcDatabaseTester jdt;
@@ -24,6 +27,17 @@ class TestNutzerDAO {
 		
 		assertEquals(2, list.size());
 		assertEquals("Johannes", list.get(0).getName());
+	}
+	
+	@Test
+	void insertNutzer() {
+		Nutzer n = new Nutzer("Weiga", "weiga.rosbife", "weiga.rosbife@mail.com");
+		NutzerDAO.insert(n);
+		
+		List<Nutzer> list = NutzerDAO.alles();
+		
+		assertEquals(3, list.size());
+		assertEquals("Weiga", list.get(2).getName());
 	}
 
 }
