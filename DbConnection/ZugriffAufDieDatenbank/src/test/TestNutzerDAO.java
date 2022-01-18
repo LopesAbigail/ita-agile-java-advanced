@@ -39,5 +39,20 @@ class TestNutzerDAO {
 		assertEquals(3, list.size());
 		assertEquals("Weiga", list.get(2).getName());
 	}
+	
+	@Test
+	void insertNewNutzer() throws Exception {
+		Nutzer n = new Nutzer("Benjamin", "benjamin.roterdan", "benjamin.roterdan@mail.com");
+		NutzerDAO.insert(n);
+		
+		IDataSet currentDataSet = jdt.getConnection().createDataSet();
+		ITable currentTable = currentDataSet.getTable("USUARIO");
+		
+		FlatXmlDataFileLoader loader = new FlatXmlDataFileLoader();
+		IDataSet expectedDataSet = jdt.setDataSet(loader.load("/verify.xml"));
+		ITable expectedTable = expectedDataSet.getTable("USUARIO");
+		
+		assertEquals(expectedTable, currentTable);
+	}
 
 }
