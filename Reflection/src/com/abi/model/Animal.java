@@ -16,6 +16,7 @@ public class Animal {
         return name;
     }
 
+    @Ignore
     public String getColor() {
         return color;
     }
