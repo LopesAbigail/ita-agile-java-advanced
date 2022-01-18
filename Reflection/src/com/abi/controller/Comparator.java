@@ -1,6 +1,7 @@
 package com.abi.controller;
 
 import com.abi.model.Difference;
+import com.abi.model.Ignore;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,7 +19,8 @@ public class Comparator {
         {
             if(method.getName().startsWith("get")
                     && method.getParameterCount() == 0
-                    && method.getReturnType() != void.class)
+                    && method.getReturnType() != void.class
+                    && !method.isAnnotationPresent(Ignore.class))
             {
                 Object oldValue = method.invoke(oldObject);
                 Object newValue = method.invoke(newObject);
