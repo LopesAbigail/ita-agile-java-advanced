@@ -41,6 +41,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
     @Override
     public Usuario recuperar(String login) {
+        Usuario u = new Usuario();
         try (Connection c = DriverManager.getConnection(
                 "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
 
@@ -48,20 +49,52 @@ public class UsuarioDAO implements IUsuarioDAO {
 
             PreparedStatement stm = c.prepareStatement(sql);
             stm.setString(1, login);
-
             ResultSet rs = stm.executeQuery();
 
-            return new Usuario(
-                    rs.getString("login"),
-                    rs.getString("email"),
-                    rs.getString("nome"),
-                    rs.getString("senha"),
-                    rs.getInt("pontos"));
-
+            while(rs.next()) {
+                u = new Usuario(
+                        rs.getString("login"),
+                        rs.getString("email"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getInt("pontos"));
+            }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
         }
+
+        return u;
+    }
+
+    public List<Usuario> recuperarUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try (Connection c = DriverManager.getConnection(
+                "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
+
+            String sql = "SELECT * FROM usuario;";
+
+            PreparedStatement stm = c.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+
+            while(rs.next()) {
+                 Usuario u = new Usuario(
+                        rs.getString("login"),
+                        rs.getString("email"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getInt("pontos"));
+
+                 usuarios.add(u);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
+        }
+
+        return usuarios;
     }
 
     @Override
