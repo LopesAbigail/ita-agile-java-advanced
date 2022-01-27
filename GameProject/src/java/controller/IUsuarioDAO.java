@@ -1,4 +1,4 @@
-package com.abi.controller;
+package controller;
 
 import com.abi.model.Usuario;
 

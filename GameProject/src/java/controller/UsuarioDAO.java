@@ -1,4 +1,4 @@
-package com.abi.controller;
+package controller;
 
 import com.abi.model.Usuario;
 
@@ -68,7 +68,7 @@ public class UsuarioDAO implements IUsuarioDAO {
     }
 
     public List<Usuario> recuperarUsuarios() {
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<Usuario>();
 
         try (Connection c = DriverManager.getConnection(
                 "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
@@ -119,7 +119,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
     @Override
     public List<Usuario> ranking() {
-        List<Usuario> rank = new ArrayList<>();
+        List<Usuario> rank = new ArrayList<Usuario>();
         try (Connection c = DriverManager.getConnection(
                 "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
 
