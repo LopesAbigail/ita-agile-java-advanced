@@ -1,6 +1,6 @@
 package controller;
 
-import com.abi.model.Usuario;
+import model.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +15,24 @@ public class UsuarioDAO implements IUsuarioDAO {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    
+    public String getNomeUsuario(String login, String senha) throws Exception{
+        
+        try(Connection c = DriverManager.getConnection(
+                "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
+            String QUERY = "SELECT nome FROM USUARIO WHERE login = ? AND senha = ?";
+            PreparedStatement ps = c.prepareStatement(QUERY);
+            ps.setString(1, login);
+            ps.setString(2, senha);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getString("nome");
+            }
+            throw new Exception("Não foi possível autenticar o usuário de login " + login);
+        } catch (SQLException e){
+            throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
+        } 
     }
 
     @Override

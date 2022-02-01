@@ -1,6 +1,6 @@
 package controller;
 
-import com.abi.model.Usuario;
+import model.Usuario;
 
 import java.util.List;
 

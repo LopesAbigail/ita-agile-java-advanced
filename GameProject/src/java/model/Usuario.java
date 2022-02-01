@@ -1,4 +1,4 @@
-package com.abi.model;
+package model;
 
 public class Usuario {
 
