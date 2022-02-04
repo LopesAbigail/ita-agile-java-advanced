@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Aee deu certo ;)</h1>
-        <h3>Bem-vinda(o), $[nomeUsuario]</h3>
+        <h3>Bem-vinda(o), ${nome}!</h3>
     </body>
 </html>
