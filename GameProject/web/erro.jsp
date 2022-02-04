@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Ocorreu um erro!!</h1>
-        <h4>$(ex)</h4>
+        <h4>${erro}</h4>
     </body>
 </html>
