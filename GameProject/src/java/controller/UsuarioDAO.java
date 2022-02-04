@@ -53,7 +53,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
+            throw new RuntimeException("Ocorreu o seguinte erro ao tentar criar um usuario: ", e);
         }
     }
 
