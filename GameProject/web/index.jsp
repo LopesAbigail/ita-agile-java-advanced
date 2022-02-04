@@ -9,9 +9,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>login</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Realize seu login entrando com as informacoes necessarias: </h1>
+        <div>
+            <form method="POST" action="login">
+                Login: <input type="text" name="login" placeholder="insira seu login"/>
+                Senha: <input type="password" name="senha" placeholder="insira sua senha"/>
+                <input type="submit" value="Realizar login"/>
+            </form>
+        </div>
+        <h1>Ou crie uma conta abaixo: </h1>
+        <div>
+            <form method="GET" action="login">
+                <input type="submit" value="Criar uma conta"/>
+            </form>
+        </div>
     </body>
 </html>
