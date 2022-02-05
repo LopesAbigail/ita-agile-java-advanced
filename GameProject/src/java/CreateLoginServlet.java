@@ -36,6 +36,8 @@ public class CreateLoginServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println("ERRO: " + e);
         }
+        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
 }

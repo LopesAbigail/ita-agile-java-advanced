@@ -39,5 +39,12 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("erro.jsp").forward(request, response);
         }
     }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    
+        request.getRequestDispatcher("create.jsp").forward(request, response);
+    }
 
 }
