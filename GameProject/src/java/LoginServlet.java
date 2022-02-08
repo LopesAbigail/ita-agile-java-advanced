@@ -30,8 +30,10 @@ public class LoginServlet extends HttpServlet {
         
         UsuarioDAO auth = new UsuarioDAO();
         try {
-            String nomeUsuario = auth.getNomeUsuario(LOGIN, SENHA);
-            request.setAttribute("nome", nomeUsuario);
+            if (auth.getNomeUsuario(LOGIN, SENHA) != null){
+                String nomeUsuario = auth.getNomeUsuario(LOGIN, SENHA);
+                request.setAttribute("nome", nomeUsuario);
+            }
             request.getRequestDispatcher("sucesso.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
