@@ -17,7 +17,7 @@ public class TopicoDAO {
         }
     }
     
-    public String getTopicoByLogin(String login) throws Exception{
+    public String getTopicosByLogin(String login) throws Exception{
         
         try(Connection c = DriverManager.getConnection(
                 "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
@@ -50,6 +50,23 @@ public class TopicoDAO {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException("Ocorreu o seguinte erro ao tentar criar um topico para o usuario: ", e);
+        }
+    }
+    
+    public void UpdateTopicoByLogin(String  login) {
+        try (Connection c = DriverManager.getConnection(
+                "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
+
+            String sql = "UPDATE Topico (titulo, conteudo, login) WHERE login == ?;";
+
+            PreparedStatement stm = c.prepareStatement(sql);
+            stm.setString(1, login);
+
+            stm.executeUpdate();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException("Ocorreu o seguinte erro ao tentar recuperar um topico para o usuario: ", e);
         }
     }
 
