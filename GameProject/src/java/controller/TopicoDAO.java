@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO implements IUserDAO {
+public class TopicoDAO implements IUserDAO {
 
     static {
         try {
