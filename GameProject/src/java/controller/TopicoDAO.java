@@ -1,12 +1,12 @@
 package controller;
 
-import model.Usuario;
+import model.Topico;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopicoDAO implements IUserDAO {
+public class TopicoDAO {
 
     static {
         try {
@@ -17,151 +17,40 @@ public class TopicoDAO implements IUserDAO {
         }
     }
     
-    public String getNomeUsuario(String login, String senha) throws Exception{
+    public String getTopicoByLogin(String login) throws Exception{
         
         try(Connection c = DriverManager.getConnection(
                 "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
-            String QUERY = "SELECT nome FROM USUARIO WHERE login = ? AND senha = ?";
+            String QUERY = "SELECT nome FROM TOPICO WHERE login = ?;";
             PreparedStatement ps = c.prepareStatement(QUERY);
             ps.setString(1, login);
-            ps.setString(2, senha);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                return rs.getString("nome");
+                return rs.getString("titulo");
             }
-            throw new Exception("Não foi possível autenticar o usuário de login " + login);
+            throw new Exception("Não foi possível recuperar o topico para o login " + login);
         } catch (SQLException e){
             throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
         } 
     }
 
-    @Override
-    public void inserir(Usuario u) {
+    public void inserir(Topico  t) {
         try (Connection c = DriverManager.getConnection(
                 "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
 
-            String sql = "INSERT INTO usuario(login, email, nome, senha, pontos) VALUES (?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO Topico (titulo, conteudo, login) VALUES (?, ?, ?);";
 
             PreparedStatement stm = c.prepareStatement(sql);
-            stm.setString(1, u.getLogin());
-            stm.setString(2, u.getEmail());
-            stm.setString(3, u.getNome());
-            stm.setString(4, u.getSenha());
-            stm.setInt(5, u.getPontos());
+            stm.setString(1, t.getTitulo());
+            stm.setString(2, t.getConteudo());
+            stm.setString(3, t.getLogin());
 
             stm.executeUpdate();
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            throw new RuntimeException("Ocorreu o seguinte erro ao tentar criar um usuario: ", e);
+            throw new RuntimeException("Ocorreu o seguinte erro ao tentar criar um topico para o usuario: ", e);
         }
     }
 
-    @Override
-    public Usuario recuperar(String login) {
-        Usuario u = new Usuario();
-        try (Connection c = DriverManager.getConnection(
-                "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
-
-            String sql = "SELECT * FROM usuario WHERE login = ?;";
-
-            PreparedStatement stm = c.prepareStatement(sql);
-            stm.setString(1, login);
-            ResultSet rs = stm.executeQuery();
-
-            while(rs.next()) {
-                u = new Usuario(
-                        rs.getString("login"),
-                        rs.getString("email"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getInt("pontos"));
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
-        }
-
-        return u;
-    }
-
-    public List<Usuario> recuperarUsuarios() {
-        List<Usuario> usuarios = new ArrayList<Usuario>();
-
-        try (Connection c = DriverManager.getConnection(
-                "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
-
-            String sql = "SELECT * FROM usuario;";
-
-            PreparedStatement stm = c.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-
-
-            while(rs.next()) {
-                 Usuario u = new Usuario(
-                        rs.getString("login"),
-                        rs.getString("email"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getInt("pontos"));
-
-                 usuarios.add(u);
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
-        }
-
-        return usuarios;
-    }
-
-    @Override
-    public void adicionarPontos(String login, int pontos) {
-        try (Connection c = DriverManager.getConnection(
-                "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
-
-            String sql = "UPDATE usuario SET pontos = pontos + ? WHERE login = ?;";
-
-            PreparedStatement stm = c.prepareStatement(sql);
-            stm.setInt(1, pontos);
-            stm.setString(2, login);
-
-            stm.executeUpdate();
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
-        }
-
-    }
-
-    @Override
-    public List<Usuario> ranking() {
-        List<Usuario> rank = new ArrayList<Usuario>();
-        try (Connection c = DriverManager.getConnection(
-                "jdbc:postgresql://localhost/coursera", "postgres", "postgres")){
-
-            String sql = "SELECT * FROM usuario ORDER BY pontos DESC;";
-
-            PreparedStatement stm = c.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-
-            while (rs.next()){
-                Usuario u = new Usuario(
-                        rs.getString("login"),
-                        rs.getString("email"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getInt("pontos"));
-
-                rank.add(u);
-            }
-
-            return rank;
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException("Ocorreu o seguinte erro ao tentar estabeler a conexao!", e);
-        }
-    }
 }
